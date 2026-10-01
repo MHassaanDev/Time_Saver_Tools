@@ -1,0 +1,6 @@
+# TimeSaver Tools — robots.txt
+# Allow full crawl of all public tool pages, including the assets needed to render them.
+User-agent: *
+Allow: /
+
+Sitemap: https://timesavertools.vercel.app/sitemap.xml

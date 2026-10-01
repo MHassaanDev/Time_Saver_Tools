@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+
+body {
+  @apply bg-white text-ink-900 dark:bg-ink-950 dark:text-ink-50 font-sans antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* Plain-textarea "code editor" look — deliberately not a heavy editor library.
+   Keeps the bundle tiny and the Lighthouse score high (see README "Why no
+   Monaco/CodeMirror"). */
+.code-editor {
+  @apply w-full h-full resize-none font-mono text-sm leading-6 p-4 rounded-lg
+         bg-ink-50 dark:bg-ink-900 text-ink-900 dark:text-ink-100
+         border border-ink-200 dark:border-ink-800
+         focus:outline-none focus:ring-2 focus:ring-brand-500
+         placeholder:text-ink-400;
+  tab-size: 2;
+}
+
+.btn {
+  @apply inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium
+         transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+}
+.btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-700; }
+.btn-secondary { @apply btn bg-ink-100 text-ink-800 hover:bg-ink-200 dark:bg-ink-800 dark:text-ink-100 dark:hover:bg-ink-700; }
+.btn-ghost { @apply btn text-ink-600 hover:bg-ink-100 dark:text-ink-300 dark:hover:bg-ink-800; }
+
+.card {
+  @apply rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900;
+}
+
+/* Styling for rendered Markdown/CV preview output — hand-written instead of
+   pulling in @tailwindcss/typography for one component's worth of prose
+   styling; keeps the dependency list at zero extra packages. */
+.markdown-preview, .cv-preview {
+  @apply text-sm leading-relaxed text-ink-800 dark:text-ink-200;
+}
+.markdown-preview h1, .cv-preview h1 { @apply text-2xl font-bold mt-4 mb-2 first:mt-0; }
+.markdown-preview h2, .cv-preview h2 { @apply text-xl font-bold mt-4 mb-2; }
+.markdown-preview h3 { @apply text-lg font-semibold mt-3 mb-1.5; }
+.markdown-preview p { @apply mb-3; }
+.markdown-preview ul, .markdown-preview ol { @apply mb-3 pl-6; }
+.markdown-preview ul { @apply list-disc; }
+.markdown-preview ol { @apply list-decimal; }
+.markdown-preview ul.checklist { @apply list-none pl-0; }
+.markdown-preview li { @apply mb-1; }
+.markdown-preview blockquote { @apply border-l-4 border-ink-200 dark:border-ink-700 pl-3 italic text-ink-500 mb-3; }
+.markdown-preview code { @apply font-mono text-xs bg-ink-100 dark:bg-ink-800 rounded px-1 py-0.5; }
+.markdown-preview pre { @apply bg-ink-100 dark:bg-ink-800 rounded-lg p-3 overflow-auto mb-3; }
+.markdown-preview pre code { @apply bg-transparent p-0; }
+.markdown-preview table { @apply border-collapse mb-3 w-full text-xs; }
+.markdown-preview th, .markdown-preview td { @apply border border-ink-200 dark:border-ink-700 px-2 py-1; }
+.markdown-preview hr { @apply border-ink-200 dark:border-ink-700 my-4; }
+.markdown-preview a { @apply text-brand-600 dark:text-brand-400 underline; }
+.markdown-preview img { @apply max-w-full rounded; }
+
+/* Print support for the CV Builder's "Print / Save as PDF" button. Hides
+   everything except the CV preview itself when printing — otherwise the
+   header, footer, form panel, and ad slots would print too. Scoped so it
+   only takes effect during an actual print, not on-screen. */
+@media print {
+  body * { visibility: hidden; }
+  #cv-print-area, #cv-print-area * { visibility: visible; }
+  #cv-print-area {
+    position: absolute; left: 0; top: 0; width: 100%;
+    border: none !important; box-shadow: none !important;
+  }
+}
