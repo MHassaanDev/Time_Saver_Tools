@@ -6,7 +6,7 @@
 //
 // STEP 1 — Create a GA4 property (analytics.google.com), get its
 // Measurement ID (format: "G-XXXXXXXXXX"), and paste it here:
-export const GA_MEASUREMENT_ID = '' // '' = analytics disabled site-wide
+export const GA_MEASUREMENT_ID = 'G-HE1CDBP9LS' // '' = analytics disabled site-wide
 
 export const ANALYTICS_ENABLED = Boolean(GA_MEASUREMENT_ID)
 // ================================
