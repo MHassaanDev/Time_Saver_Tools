@@ -23,7 +23,7 @@ const siteSrc = readFileSync(path.join(root, 'src/config/site.js'), 'utf8')
 
 const slugs = [...registrySrc.matchAll(/\n\s*slug: '([^']+)'/g)].map(m => m[1])
 const urlMatch = siteSrc.match(/url: '([^']+)'/)
-const baseUrl = (urlMatch ? urlMatch[1] : 'https://example.com').replace(/\/$/, '')
+const baseUrl = (urlMatch ? urlMatch[1] : 'https://timesavertools.vercel.app').replace(/\/$/, '')
 
 if (slugs.length === 0) {
   console.error('generate-sitemap: found 0 tool slugs — toolRegistry.js format may have changed. Aborting so a near-empty sitemap never ships silently.')
